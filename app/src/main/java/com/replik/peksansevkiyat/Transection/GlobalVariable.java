@@ -11,7 +11,7 @@ public class GlobalVariable extends Application {
     public static String getApiUrl() { return apiUrl; /*apiUrl == null ? "http://192.168.2.251:7076/" : apiUrl; */ }
     public static void setApiUrl(String url) { apiUrl = url; }
 
-    public static String apiVersion = "1.0.18";
+    public static String apiVersion = "1.0.19";
 
     public static String printerName;
     public static void setPrinter(String name) { printerName = name; }

@@ -80,7 +80,7 @@
 
                 <EditText
                     android:id="@+id/txtSearch"
-                    android:layout_width="match_parent"
+                    android:layout_width="282dp"
                     android:layout_height="@dimen/fifty"
                     android:layout_marginLeft="@dimen/forty"
                     android:layout_marginTop="@dimen/ten"
@@ -96,7 +96,7 @@
 
                 <TextView
                     android:id="@+id/lblBoxCount"
-                    android:layout_width="@dimen/forty"
+                    android:layout_width="43dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/ten"
                     android:layout_marginEnd="@dimen/ten"
