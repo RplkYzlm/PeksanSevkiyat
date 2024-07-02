@@ -128,4 +128,11 @@ public class ShipmentOrderListActivity extends AppCompatActivity implements List
 
         startActivity(i);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        fetchCustomerOrders();
+    }
 }

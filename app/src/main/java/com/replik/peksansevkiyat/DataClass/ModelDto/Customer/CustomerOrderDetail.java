@@ -1,6 +1,8 @@
 package com.replik.peksansevkiyat.DataClass.ModelDto.Customer;
 
-public class CustomerOrderDetail {
+import java.io.Serializable;
+
+public class CustomerOrderDetail implements Serializable {
     private int id;
     private String sevkNo;
     private String sipNo;

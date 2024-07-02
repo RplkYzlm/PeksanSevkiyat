@@ -38,17 +38,29 @@ public class PalletDetail {
         return palletId;
     }
 
-    public String getSeriNo() { return seriNo; }
+    public String getSeriNo() {
+        return seriNo;
+    }
 
-    public String getStokKodu() { return stokKodu; }
+    public String getStokKodu() {
+        return stokKodu;
+    }
 
-    public String getGovde() { return govde; }
+    public String getGovde() {
+        return govde;
+    }
 
-    public String getLogo() { return logo; }
+    public String getLogo() {
+        return logo;
+    }
 
-    public String getUst() { return ust; }
+    public String getUst() {
+        return ust;
+    }
 
-    public String getYapKod() { return yapKod; }
+    public String getYapKod() {
+        return yapKod;
+    }
 
     public Integer getDepoKodu() {
         return depoKodu;

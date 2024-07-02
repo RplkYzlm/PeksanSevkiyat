@@ -2,7 +2,10 @@ package com.replik.peksansevkiyat.Transection;
 
 import android.app.Application;
 
+import com.replik.peksansevkiyat.DataClass.ModelDto.Customer.CustomerOrderDetail;
 import com.replik.peksansevkiyat.DataClass.ModelDto.Order.Order;
+
+import java.util.List;
 
 public class GlobalVariable extends Application {
     public static String FileName = "/Replik.txt";
@@ -10,14 +13,26 @@ public class GlobalVariable extends Application {
     public static String apiUrl;
 
     public static String getApiUrl() {
-        return apiUrl; /*apiUrl == null ? "http://192.168.2.251:7076/" : apiUrl; */
+        return apiUrl;
+    }
+
+    public static String apiPdfUrl = "http://185.148.84.56:7248/";
+
+    public static List<CustomerOrderDetail> customerOrderDetails;
+
+    public static List<CustomerOrderDetail> getCustomerOrderDetails() {
+        return customerOrderDetails;
+    }
+
+    public static void setCustomerOrderDetails(List<CustomerOrderDetail> products) {
+        customerOrderDetails = products;
     }
 
     public static void setApiUrl(String url) {
         apiUrl = url;
     }
 
-    public static String apiVersion = "1.0.20";
+    public static String apiVersion = "1.0.38";
 
     public static String printerName;
 

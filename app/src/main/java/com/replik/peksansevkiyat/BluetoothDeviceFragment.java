@@ -50,7 +50,7 @@ public class BluetoothDeviceFragment extends DialogFragment {
 
         Set<BluetoothDevice> pairedDevices = bAdapter.getBondedDevices();
         ArrayList list = new ArrayList();
-        if(pairedDevices.size()>0) {
+        if (pairedDevices.size() > 0) {
             for (BluetoothDevice device : pairedDevices) {
                 String devicename = device.getName();
                 //String macAddress = device.getAddress();

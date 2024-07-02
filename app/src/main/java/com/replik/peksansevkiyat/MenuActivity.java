@@ -10,7 +10,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.replik.peksansevkiyat.DataClass.ModelDto.Label.ZarfLabel;
+import com.replik.peksansevkiyat.DataClass.ModelDto.Label.ZarfProducts;
 import com.replik.peksansevkiyat.Transection.GlobalVariable;
+import com.replik.peksansevkiyat.Transection.PrintBluetooth;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MenuActivity extends AppCompatActivity {
     Button btnMenuPalette, btnMenuOrder, btnShipment;
@@ -34,7 +41,6 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
         btnMenuPalette = (Button) findViewById(R.id.btnPaletteAdd);
         btnMenuPalette.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

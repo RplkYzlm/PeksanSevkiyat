@@ -6,10 +6,13 @@ import com.replik.peksansevkiyat.DataClass.ModelDto.Customer.CustomerOrder;
 import com.replik.peksansevkiyat.DataClass.ModelDto.Customer.CustomerOrderDetail;
 import com.replik.peksansevkiyat.DataClass.ModelDto.Dtos.dtoPalletDetailAndSeritra_data;
 import com.replik.peksansevkiyat.DataClass.ModelDto.Dtos.getStandartLong;
+import com.replik.peksansevkiyat.DataClass.ModelDto.Label.ZarfLabelResult;
 import com.replik.peksansevkiyat.DataClass.ModelDto.Order.OrderDtos;
 import com.replik.peksansevkiyat.DataClass.ModelDto.Order.OrderList;
 import com.replik.peksansevkiyat.DataClass.ModelDto.OrderDetail.OrderDetailList;
 import com.replik.peksansevkiyat.DataClass.ModelDto.OrderShipping.OrderShippingList;
+import com.replik.peksansevkiyat.DataClass.ModelDto.OrderShipping.OrderShippingTransport;
+import com.replik.peksansevkiyat.DataClass.ModelDto.OrderShipping.UpdateOrderShippingTransportDto;
 import com.replik.peksansevkiyat.DataClass.ModelDto.Pallet.PalletDetail;
 import com.replik.peksansevkiyat.DataClass.ModelDto.Pallet.PalletSingle;
 import com.replik.peksansevkiyat.DataClass.ModelDto.Pallet.dtoPalletPrint;
@@ -95,15 +98,15 @@ public interface APIInterface {
 
     // --------------- DELETE
     @Headers({"CONNECT_TIMEOUT:60000", "READ_TIMEOUT:60000", "WRITE_TIMEOUT:60000"})
-    @HTTP(method = "DELETE", path = "api/delPalletDetail", hasBody = true)
+    @HTTP(method = "POST", path = "api/delPalletDetail", hasBody = true)
     Call<PalletDetailList> delPalletDetail(@Body PalletDetailDtos.delPalletDetailColumn delPalletDetailColumn);
 
     @Headers({"CONNECT_TIMEOUT:60000", "READ_TIMEOUT:60000", "WRITE_TIMEOUT:60000"})
-    @HTTP(method = "DELETE", path = "api/delPallet", hasBody = true)
+    @HTTP(method = "POST", path = "api/delPallet", hasBody = true)
     Call<Result> delPallet(@Body getStandartLong delStandartColumn);
 
     @Headers({"CONNECT_TIMEOUT:60000", "READ_TIMEOUT:60000", "WRITE_TIMEOUT:60000"})
-    @HTTP(method = "DELETE", path = "api/delOrderPicking", hasBody = true)
+    @HTTP(method = "POST", path = "api/delOrderPicking", hasBody = true)
     Call<Result> delOrderPicking(@Body OrderDtos.delPickingItem delPickingItem);
 
 
@@ -138,6 +141,18 @@ public interface APIInterface {
     Call<List<PalletDetail>> getPalletDetail(@Query("barkod") String barcode);
 
     @Headers({"CONNECT_TIMEOUT:60000", "READ_TIMEOUT:60000", "WRITE_TIMEOUT:60000"})
-    @POST("api/Mobile/CreateOrderByProducts")
+    @POST("api/Shipment/CreateOrderProducts")
     Call<Result> createOrderByProducts(@Body OrderDtos.createOrderByProductsDto createOrderByProductsDto);
+
+    @Headers({"CONNECT_TIMEOUT:60000", "READ_TIMEOUT:60000", "WRITE_TIMEOUT:60000"})
+    @POST("api/Shipment/CreateNetsisShipment")
+    Call<ZarfLabelResult> createNetsisShipment(@Body OrderDtos.setNetsisShipment setNetsisShipmentDto);
+
+    @Headers({"CONNECT_TIMEOUT:60000", "READ_TIMEOUT:60000", "WRITE_TIMEOUT:60000"})
+    @GET("api/Shipment/TransportList")
+    Call<List<OrderShippingTransport>> getTransportList();
+
+    @Headers({"CONNECT_TIMEOUT:60000", "READ_TIMEOUT:60000", "WRITE_TIMEOUT:60000"})
+    @POST("api/Shipment/UpdateTransportType")
+    Call<Result> updateTransportType(@Body UpdateOrderShippingTransportDto updateOrderShippingTransportDto);
 }

@@ -37,9 +37,7 @@ public class PalettePrint extends AppCompatActivity {
     APIInterface apiInterface;
     ProgressDialog nDialog;
     AlertDialog alert;
-
     PrintBluetooth printBT = new PrintBluetooth();
-
     Context context = PalettePrint.this;
 
     ImageButton imgLogo, imgSettings;
@@ -90,14 +88,13 @@ public class PalettePrint extends AppCompatActivity {
             @Override
             public void onResponse(Call<dtoPalletPrint.PalletPrintList> call, Response<dtoPalletPrint.PalletPrintList> response) {
                 nDialog.hide();
-                if(response.body().getSuccess()) {
+                if (response.body().getSuccess()) {
                     if (response.body().getPalletPrints() != null) {
                         fnAddPalletDetail(response.body());
                     } else {
                         Toast.makeText(context, getString(R.string.empty_list), Toast.LENGTH_LONG).show();
                     }
-                }
-                else {
+                } else {
                     alert = Alert.getAlert(context, getString(R.string.danger), response.body().getMessage());
                     alert.show();
                 }
@@ -115,7 +112,7 @@ public class PalettePrint extends AppCompatActivity {
     private void fnAddPalletDetail(dtoPalletPrint.PalletPrintList lstPalletPrints) {
         ArrayList lst = new ArrayList<dtoPalletPrint>();
 
-        if(lstPalletPrints != null)
+        if (lstPalletPrints != null)
             for (dtoPalletPrint p : lstPalletPrints.getPalletPrints()) {
                 lst.add(p);
             }
@@ -147,7 +144,6 @@ public class PalettePrint extends AppCompatActivity {
     void fnPrint(dtoPalletPrint palet) {
         try {
             PrintBluetooth.printer_id = GlobalVariable.printerName;
-
             // YAZMA BAŞLAR
             printBT.findBT();
             printBT.openBT();
@@ -161,12 +157,11 @@ public class PalettePrint extends AppCompatActivity {
                 public void onResponse(Call<Result> call, Response<Result> response) {
                     nDialog.hide();
 
-                    if(response.body().getSuccess()) {
+                    if (response.body().getSuccess()) {
                         alert = Alert.getAlert(context, getString(R.string.info), palet.getBarkod() + "\nYazdırıldı.");
                         alert.show();
                         fnGetPalletPrintList();
-                    }
-                    else {
+                    } else {
                         alert = Alert.getAlert(context, getString(R.string.error), response.body().getMessage());
                         alert.show();
                     }
@@ -179,9 +174,7 @@ public class PalettePrint extends AppCompatActivity {
                     alert.show();
                 }
             });
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             String error = e.getMessage();
             e.printStackTrace();
         }

@@ -174,9 +174,22 @@ public class OrderDetailActivity extends AppCompatActivity implements Interfaces
 
                     if (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
                         if (GlobalVariable.getSelectedOrder().getNumuneSip())
-                            fnShowManuelQuantity(txtBarcode.getText().toString());
+                            if (txtBarcode.getText().toString().contains("=")) {
+                                String[] value = txtBarcode.getText().toString().split("=");
+
+                                fnShowManuelQuantity(value[1].toUpperCase());
+
+                            } else
+                                fnShowManuelQuantity(txtBarcode.getText().toString());
                         else
-                            fnOrderPicking(txtBarcode.getText().toString(), 1.0);
+                            //buras
+                            if (txtBarcode.getText().toString().contains("=")) {
+                                String[] value = txtBarcode.getText().toString().split("=");
+
+                                fnOrderPicking(value[1].toUpperCase(),1.0);
+
+                            } else
+                                fnOrderPicking(txtBarcode.getText().toString(),1.0);
 
                         return true;
                     }

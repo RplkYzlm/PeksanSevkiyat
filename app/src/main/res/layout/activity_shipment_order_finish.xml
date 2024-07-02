@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/replik"
+    tools:context=".OrderFinishActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sixty"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imgLogo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:backgroundTint="@color/replik"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/replik_logo" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ten"
+                    android:text="@string/test_user"
+                    android:textColor="@color/white_light" />
+
+                <TextView
+                    android:id="@+id/txtMenuName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/menu_order_send"
+                    android:textColor="@color/white_light" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/imgSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/four"
+                android:layout_weight="0"
+                android:backgroundTint="@color/replik"
+                android:contentDescription="@string/empty"
+                app:srcCompat="@drawable/ic_icon_settings"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/fragment_bg"
+            android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/ten"
+                app:cardBackgroundColor="@color/purple_500">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/five">
+
+                    <TextView
+                        android:id="@+id/txtSipNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/empty"
+                        android:textColor="@color/white_light"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txtSipCari"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/empty"
+                        android:textColor="@color/white_light"
+                        app:layout_constraintStart_toStartOf="@+id/txtSipNo"
+                        app:layout_constraintTop_toBottomOf="@+id/txtSipNo" />
+
+                    <TextView
+                        android:id="@+id/txtSipTarih"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/empty"
+                        android:textColor="@color/white_light"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/thirty"
+                android:layout_marginRight="@dimen/thirty"
+                android:text="@string/order_tasiyici_bilgileri"
+                android:textAlignment="center"
+                android:textColor="@color/white_light" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/pnlSearch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/fragment_bg"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/seventy"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <EditText
+                        android:id="@+id/txtSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/fifty"
+                        android:layout_marginLeft="@dimen/forty"
+                        android:layout_marginTop="@dimen/ten"
+                        android:layout_marginRight="@dimen/forty"
+                        android:backgroundTint="@color/white_light"
+                        android:ems="10"
+                        android:hint="@string/search"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white_light" />
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/lstData"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/sixty_fife"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+                    <requestFocus />
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/pnlProgressBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/sixty"
+                    android:background="#2AE1E1E1"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+                    <ProgressBar
+                        android:id="@+id/pBar"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/pnlAddShipping"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/sixty"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <Button
+                        android:id="@+id/btnAddShipping"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/sixty"
+                        android:layout_margin="@dimen/ten"
+                        android:text="@string/add_order_shipping"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ScrollView
+                android:id="@+id/pnlManualEntry"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/ten"
+                android:layout_weight="1"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty"
+                    android:layout_marginRight="@dimen/twenty"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/txtOrderPlaka"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/fifty"
+                        android:autofillHints=""
+                        android:backgroundTint="@color/white_light"
+                        android:hint="@string/order_plaka"
+                        android:inputType="text"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white_light" />
+
+                    <EditText
+                        android:id="@+id/txtOrderVergiNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/fifty"
+                        android:autofillHints=""
+                        android:backgroundTint="@color/white_light"
+                        android:hint="@string/order_vergino"
+                        android:inputType="text"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white_light" />
+
+                    <EditText
+                        android:id="@+id/txtOrderIsim"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/fifty"
+                        android:autofillHints=""
+                        android:backgroundTint="@color/white_light"
+                        android:hint="@string/order_isim"
+                        android:inputType="text"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white_light" />
+
+                    <EditText
+                        android:id="@+id/txtOrderIlce"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/fifty"
+                        android:autofillHints=""
+                        android:backgroundTint="@color/white_light"
+                        android:hint="@string/order_ilce"
+                        android:inputType="text"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white_light" />
+
+                    <EditText
+                        android:id="@+id/txtOrderIl"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/fifty"
+                        android:autofillHints=""
+                        android:backgroundTint="@color/white_light"
+                        android:hint="@string/order_il"
+                        android:inputType="text"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white_light" />
+
+                    <EditText
+                        android:id="@+id/txtOrderUlke"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/fifty"
+                        android:autofillHints=""
+                        android:backgroundTint="@color/white_light"
+                        android:hint="@string/order_ulke"
+                        android:inputType="text"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white_light" />
+
+                    <EditText
+                        android:id="@+id/txtOrderPosta"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/fifty"
+                        android:autofillHints=""
+                        android:backgroundTint="@color/white_light"
+                        android:hint="@string/order_posta"
+                        android:inputType="text"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white_light" />
+
+                    <EditText
+                        android:id="@+id/txtOrderSoforAd"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/fifty"
+                        android:autofillHints=""
+                        android:backgroundTint="@color/white_light"
+                        android:hint="@string/order_sofor_ad"
+                        android:inputType="text"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white_light" />
+
+                    <EditText
+                        android:id="@+id/txtOrderSoforSoyad"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/fifty"
+                        android:autofillHints=""
+                        android:backgroundTint="@color/white_light"
+                        android:hint="@string/order_sofor_soyad"
+                        android:inputType="text"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white_light" />
+
+                    <EditText
+                        android:id="@+id/txtOrderSoforTc"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/fifty"
+                        android:autofillHints=""
+                        android:backgroundTint="@color/white_light"
+                        android:hint="@string/order_sofor_tc"
+                        android:inputType="text"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white_light" />
+
+                    <EditText
+                        android:id="@+id/txtOrderAciklama"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/fifty"
+                        android:autofillHints=""
+                        android:backgroundTint="@color/white_light"
+                        android:hint="@string/order_sofor_aciklama"
+                        android:inputType="text"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white_light" />
+
+                    <EditText
+                        android:id="@+id/txtOrderDorse1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/fifty"
+                        android:autofillHints=""
+                        android:backgroundTint="@color/white_light"
+                        android:hint="@string/order_sofor_dorse"
+                        android:inputType="text"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white_light" />
+
+                    <Button
+                        android:id="@+id/btnOrderFinish"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/sixty"
+                        android:layout_margin="@dimen/ten"
+                        android:text="@string/finish_order_end" />
+
+                </LinearLayout>
+            </ScrollView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

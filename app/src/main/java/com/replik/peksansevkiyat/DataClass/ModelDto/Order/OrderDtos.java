@@ -1,5 +1,7 @@
 package com.replik.peksansevkiyat.DataClass.ModelDto.Order;
 
+import android.hardware.camera2.CameraExtensionSession;
+
 import com.google.gson.annotations.SerializedName;
 import com.replik.peksansevkiyat.DataClass.ModelDto.OrderShipping.OrderShipping;
 
@@ -9,12 +11,14 @@ import java.util.stream.Collectors;
 public class OrderDtos {
 
     public static class createOrderByProductsDto {
+        String sevkNo;
         String sipno;
         String carikod;
         int staffId;
         List<OrderProduct> products;
 
-        public createOrderByProductsDto(String sipno, String carikod, int staffId, List<OrderProduct> orderProducts) {
+        public createOrderByProductsDto(String sevkNo, String sipno, String carikod, int staffId, List<OrderProduct> orderProducts) {
+            this.sevkNo = sevkNo;
             this.sipno = sipno;
             this.carikod = carikod;
             this.staffId = staffId;
@@ -67,6 +71,20 @@ public class OrderDtos {
         public setOrderStatus(String sipNo, OrderShipping orderShipping) {
             this.sipNo = sipNo;
             this.orderShipping = orderShipping;
+        }
+    }
+
+    public static class setNetsisShipment {
+        String sevkno;
+        String carikod;
+        int staffId;
+        List<OrderShipment> orders;
+
+        public setNetsisShipment(String sevkno, String carikod, int staffId, List<OrderShipment> orders) {
+            this.sevkno = sevkno;
+            this.carikod = carikod;
+            this.staffId = staffId;
+            this.orders = orders;
         }
     }
 }

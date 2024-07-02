@@ -1,11 +1,14 @@
 package com.replik.peksansevkiyat.DataClass.ModelDto.Customer;
 
+import com.replik.peksansevkiyat.Interface.Enums.KoliPalet;
+
 import java.io.Serializable;
 
 public class CustomerOrder implements Serializable {
     private int id;
     private String sevkNo;
     private String nakliyeTipi;
+    private int nakliyeId;
     private String cariIsim;
     private String cariKod;
     private String teslimAdi;
@@ -13,6 +16,7 @@ public class CustomerOrder implements Serializable {
     private String koliAdet;
     private String createdAt;
     private String shipmentDate;
+    private int koliPalet;
 
     public int getId() {
         return id;
@@ -92,5 +96,30 @@ public class CustomerOrder implements Serializable {
 
     public void setShipmentDate(String shipmentDate) {
         this.shipmentDate = shipmentDate;
+    }
+
+    public int getNakliyeId() {
+        return nakliyeId;
+    }
+
+    public void setNakliyeId(int nakliyeId) {
+        this.nakliyeId = nakliyeId;
+    }
+
+    public String getKoliPalet() {
+        switch (this.koliPalet) {
+            case 0:
+                return "Koli";
+            case 1:
+                return "Palet";
+            case 3:
+                return "Dökme";
+        }
+
+        return "";
+    }
+
+    public void setKoliPalet(int koliPalet) {
+        this.koliPalet = koliPalet;
     }
 }

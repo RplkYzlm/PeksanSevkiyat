@@ -25,6 +25,9 @@
         android:theme="@style/Theme.TestAPP"
         tools:targetApi="31">
         <activity
+            android:name=".ShipmentOrderFinish"
+            android:exported="false" />
+        <activity
             android:name=".ShipmentOrderDetailActivity"
             android:exported="false" />
         <activity
@@ -65,6 +68,9 @@
             android:exported="false" />
         <activity
             android:name=".MenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TestPdfActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

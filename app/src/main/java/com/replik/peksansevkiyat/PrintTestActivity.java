@@ -67,9 +67,7 @@ public class PrintTestActivity extends AppCompatActivity {
                     printBT.printText(txtBarcode.getText().toString());
                     printBT.printQrCode(bitmap);
                     printBT.closeBT();
-                }
-                catch (IOException e)
-                {
+                } catch (IOException e) {
                     String error = e.getMessage();
                     e.printStackTrace();
                 }
@@ -117,9 +115,7 @@ public class PrintTestActivity extends AppCompatActivity {
                             "\nPRINT 1\nEND\n";*/
                     printBT.write(printData.getBytes(StandardCharsets.UTF_8));
                     printBT.closeBT();
-                }
-                catch (IOException e)
-                {
+                } catch (IOException e) {
                     String error = e.getMessage();
                     e.printStackTrace();
                 }
@@ -132,44 +128,47 @@ public class PrintTestActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
                     if (ContextCompat.checkSelfPermission(PrintTestActivity.this, Manifest.permission.ACCESS_NOTIFICATION_POLICY) !=
-                    PackageManager.PERMISSION_GRANTED) {
+                            PackageManager.PERMISSION_GRANTED) {
                         ActivityCompat.requestPermissions(PrintTestActivity.this,
-                                new String[]{Manifest.permission.ACCESS_NOTIFICATION_POLICY},101) ;
+                                new String[]{Manifest.permission.ACCESS_NOTIFICATION_POLICY}, 101);
                     }
                 }
 
                 String chanelID = "CHANNEL_ID_NOTIFICATION";
-                NotificationCompat. Builder builder =
+                NotificationCompat.Builder builder =
                         new NotificationCompat.Builder(getApplicationContext(), chanelID);
 
-                builder.setSmallIcon(R. drawable.ic_notification)
+                builder.setSmallIcon(R.drawable.ic_notification)
                         .setContentTitle("Notification Title")
                         .setContentText("Some text for notification here")
                         .setAutoCancel(true)
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
                 Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) ;
-                intent.putExtra("data","Some value to be passed here");
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("data", "Some value to be passed here");
 
-                PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),0, intent,PendingIntent.FLAG_MUTABLE);
+                PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_MUTABLE);
                 builder.setContentIntent(pendingIntent);
-                NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     NotificationChannel notificationChannel = notificationManager.getNotificationChannel(chanelID);
 
                     if (notificationChannel == null) {
                         int importance = NotificationManager.IMPORTANCE_HIGH;
-                        notificationChannel = new NotificationChannel (chanelID, "Some description", importance); notificationChannel.setLightColor (Color.GREEN);
+                        notificationChannel = new NotificationChannel(chanelID, "Some description", importance);
+                        notificationChannel.setLightColor(Color.GREEN);
                         notificationChannel.enableVibration(true);
-                        notificationManager.createNotificationChannel (notificationChannel);}
+                        notificationManager.createNotificationChannel(notificationChannel);
+                    }
                 }
 
                 notificationManager.notify(0, builder.build());
             }
         });
     }
+
     public static byte[] convertToBMW(Bitmap bmp, int concentration) {
         if (concentration <= 0 || concentration >= 255) {
             concentration = 128;

@@ -60,7 +60,7 @@ public class SettingsActivity extends AppCompatActivity implements Interfaces.Bl
             }
         });
 
-        btnSearch= findViewById(R.id.btnSearchPrinter);
+        btnSearch = findViewById(R.id.btnSearchPrinter);
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,7 +86,9 @@ public class SettingsActivity extends AppCompatActivity implements Interfaces.Bl
     }
 
     @Override
-    public void onBackPressed() { finish(); }
+    public void onBackPressed() {
+        finish();
+    }
 
     boolean checkPermission() {
         return ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) +
@@ -97,11 +99,12 @@ public class SettingsActivity extends AppCompatActivity implements Interfaces.Bl
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) +
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_ADMIN) +
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH) +
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.REQUEST_INSTALL_PACKAGES)  == PackageManager.PERMISSION_GRANTED;
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.REQUEST_INSTALL_PACKAGES) == PackageManager.PERMISSION_GRANTED;
     }
+
     private void fnWriteText(String url, String printer) {
 
-        if(!checkPermission())
+        if (!checkPermission())
             requestPer();
 
         StorageManager storageManager = (StorageManager) getSystemService(STORAGE_SERVICE);
@@ -115,18 +118,16 @@ public class SettingsActivity extends AppCompatActivity implements Interfaces.Bl
             fo.write(printer.getBytes());
             fo.flush();
             fo.close();
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace ();
-        }
-        catch (IOException e) {
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     void writeDatabase(String apiUrl, String printerName) {
         database = this.openOrCreateDatabase("PeksanSevkiyat", MODE_PRIVATE, null);
-        Cursor cursor = database.rawQuery("SELECT * FROM Parameter",null);
+        Cursor cursor = database.rawQuery("SELECT * FROM Parameter", null);
 
         boolean hasValue = false;
 
@@ -134,15 +135,15 @@ public class SettingsActivity extends AppCompatActivity implements Interfaces.Bl
             hasValue = true;
         }
 
-        if(hasValue)
-            database.execSQL("UPDATE Parameter SET apiUrl = '"+apiUrl+"', printerName = '"+printerName+"' WHERE id = 1");
+        if (hasValue)
+            database.execSQL("UPDATE Parameter SET apiUrl = '" + apiUrl + "', printerName = '" + printerName + "' WHERE id = 1");
         else
-            database.execSQL("INSERT INTO Parameter (id, apiUrl, printerName) VALUES(1, '"+apiUrl+"', '"+printerName+"')");
+            database.execSQL("INSERT INTO Parameter (id, apiUrl, printerName) VALUES(1, '" + apiUrl + "', '" + printerName + "')");
     }
 
     void requestPer() {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            requestPermissions(new String[] {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            requestPermissions(new String[]{
                     Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     Manifest.permission.READ_EXTERNAL_STORAGE,
                     Manifest.permission.MANAGE_EXTERNAL_STORAGE,
@@ -164,7 +165,7 @@ public class SettingsActivity extends AppCompatActivity implements Interfaces.Bl
 
     @Override
     public void selectedDevice(Boolean statu, String value) {
-        if(statu)
+        if (statu)
             txtPrinterName.setText(value.toString());
         else
             txtPrinterName.setText("");

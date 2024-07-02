@@ -34,6 +34,8 @@ import com.replik.peksansevkiyat.Transection.PrintBluetooth;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Optional;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -95,7 +97,7 @@ public class PaletteAdd extends AppCompatActivity {
         txtBarcode.requestFocus();
         txtBarcode.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(event.getAction() == KeyEvent.ACTION_UP){
+                if (event.getAction() == KeyEvent.ACTION_UP) {
                     /*if (event.getAction() == KeyEvent.KEYCODE_ENTER) {
                         Toast.makeText(context, "The text is: " + txtBarcode.getText() , Toast.LENGTH_LONG).show();
                         fnSeriControl(txtBarcode.getText().toString());
@@ -103,7 +105,13 @@ public class PaletteAdd extends AppCompatActivity {
                     }*/
 
                     if (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-                        fnSeriControl(txtBarcode.getText().toString());
+                        if (txtBarcode.getText().toString().contains("=")) {
+                            String[] value = txtBarcode.getText().toString().split("=");
+
+                            fnSeriControl(value[1].toUpperCase());
+
+                        } else
+                            fnSeriControl(txtBarcode.getText().toString());
                         return true;
                     }
                 }
@@ -127,7 +135,7 @@ public class PaletteAdd extends AppCompatActivity {
     }
 
     private void fnBackControl() {
-        if(btnPalletPrint.getVisibility() == View.VISIBLE) {
+        if (btnPalletPrint.getVisibility() == View.VISIBLE) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle(getString(R.string.sure));
             builder.setMessage(getString(R.string.question_pallet_not_print));
@@ -145,8 +153,7 @@ public class PaletteAdd extends AppCompatActivity {
                 }
             });
             builder.show();
-        }
-        else
+        } else
             finish();
     }
 
@@ -167,12 +174,11 @@ public class PaletteAdd extends AppCompatActivity {
                 public void onResponse(Call<Result> call, Response<Result> response) {
                     nDialog.hide();
 
-                    if(response.body().getSuccess()) {
+                    if (response.body().getSuccess()) {
                         alert = Alert.getAlert(context, getString(R.string.info), palletBarcode + "\nYazdırıldı.");
                         alert.show();
                         btnPalletPrint.setVisibility(View.GONE);
-                    }
-                    else {
+                    } else {
                         alert = Alert.getAlert(context, getString(R.string.error), response.body().getMessage());
                         alert.show();
                     }
@@ -185,9 +191,7 @@ public class PaletteAdd extends AppCompatActivity {
                     alert.show();
                 }
             });
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             String error = e.getMessage();
             e.printStackTrace();
         }
@@ -197,7 +201,7 @@ public class PaletteAdd extends AppCompatActivity {
         lblBoxCount.setText("0");
         txtBarcode.setText("");
         nDialog.show();
-        if(barcode.endsWith("PLT"))
+        if (barcode.endsWith("PLT"))
             fnGetPallet(barcode);
         else
             fnGetSeriControl(barcode);
@@ -207,16 +211,14 @@ public class PaletteAdd extends AppCompatActivity {
         apiInterface.getPalletControl(GlobalVariable.getUserId(), barcode).enqueue(new Callback<PalletSingle>() {
             @Override
             public void onResponse(Call<PalletSingle> call, Response<PalletSingle> response) {
-                if(response.body().getSuccess())
-                {
+                if (response.body().getSuccess()) {
                     palletId = response.body().getPallet().getId();
                     palletBarcode = response.body().getPallet().getBarkod();
                     btnPalletPrint.setVisibility(View.VISIBLE);
                     fnGetPalletDetailList();
-                }
-                else {
+                } else {
                     nDialog.hide();
-                    alert = Alert.getAlert(context,getString(R.string.error),response.body().getMessage());
+                    alert = Alert.getAlert(context, getString(R.string.error), response.body().getMessage());
                     alert.show();
                 }
             }
@@ -234,11 +236,11 @@ public class PaletteAdd extends AppCompatActivity {
         apiInterface.getPalletDetail(GlobalVariable.getUserId(), palletId).enqueue(new Callback<PalletDetailList>() {
             @Override
             public void onResponse(Call<PalletDetailList> call, Response<PalletDetailList> response) {
-                if(response.body().getSuccess())
+                if (response.body().getSuccess())
                     setPalletDetailAdapter(response.body());
                 else {
                     nDialog.hide();
-                    alert = Alert.getAlert(context,getString(R.string.error),response.body().getMessage());
+                    alert = Alert.getAlert(context, getString(R.string.error), response.body().getMessage());
                     alert.show();
                 }
             }
@@ -256,11 +258,11 @@ public class PaletteAdd extends AppCompatActivity {
         apiInterface.getSeriControl(GlobalVariable.getUserId(), barcode).enqueue(new Callback<spSeritraSingle>() {
             @Override
             public void onResponse(Call<spSeritraSingle> call, Response<spSeritraSingle> response) {
-                if(response.body().getSuccess() && response.body().getSpSeritra() != null)
+                if (response.body().getSuccess() && response.body().getSpSeritra() != null)
                     fnSetPalletDetail(response.body().getSpSeritra());
                 else {
                     nDialog.hide();
-                    alert = Alert.getAlert(context,getString(R.string.error),response.body().getMessage().toString().equals("") ?"SERİ TANIMLI DEĞİLDİR." : response.body().getMessage());
+                    alert = Alert.getAlert(context, getString(R.string.error), response.body().getMessage().toString().equals("") ? "SERİ TANIMLI DEĞİLDİR." : response.body().getMessage());
                     alert.show();
                 }
             }
@@ -275,15 +277,15 @@ public class PaletteAdd extends AppCompatActivity {
     }
 
     void fnSetPalletDetail(spSeritra seritra) {
-        PalletDetailDtos.setPalletDetailColumn data = new PalletDetailDtos.setPalletDetailColumn(palletId, palletAciklama, GlobalVariable.getUserId(), seritra.getSeriNo(), seritra.getStokKodu(),seritra.getMiktar(),seritra.getMiktar2());
+        PalletDetailDtos.setPalletDetailColumn data = new PalletDetailDtos.setPalletDetailColumn(palletId, palletAciklama, GlobalVariable.getUserId(), seritra.getSeriNo(), seritra.getStokKodu(), seritra.getMiktar(), seritra.getMiktar2());
         apiInterface.setPalletDetail(data).enqueue(new Callback<PalletDetailList>() {
             @Override
             public void onResponse(Call<PalletDetailList> call, Response<PalletDetailList> response) {
-                if(response.body().getSuccess())
+                if (response.body().getSuccess())
                     setPalletDetailAdapter(response.body());
                 else {
                     nDialog.hide();
-                    alert = Alert.getAlert(context,getString(R.string.error),response.body().getMessage());
+                    alert = Alert.getAlert(context, getString(R.string.error), response.body().getMessage());
                     alert.show();
                 }
             }
@@ -297,7 +299,7 @@ public class PaletteAdd extends AppCompatActivity {
         });
     }
 
-    void setPalletDetailAdapter(PalletDetailList lstPalletDetail){
+    void setPalletDetailAdapter(PalletDetailList lstPalletDetail) {
         ArrayList lst = new ArrayList<PalletDetail>();
         for (PalletDetail p : lstPalletDetail.getPalletDetails()) {
             palletId = p.getPalletId();

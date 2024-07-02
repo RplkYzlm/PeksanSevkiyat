@@ -14,7 +14,6 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class PrintActivity extends AppCompatActivity {
-
     WebView webView;
     Button btnPrint;
 
@@ -33,6 +32,7 @@ public class PrintActivity extends AppCompatActivity {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }
+
             @Override
             public void onPageFinished(WebView view, String url) {
                 //if WebView load successfully then VISIBLE fab Button

@@ -1,5 +1,7 @@
 package com.replik.peksansevkiyat.DataClass.ListAdapter;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,19 +26,20 @@ public class ListAdapter_Customer_Order_Detail extends RecyclerView.Adapter<List
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView stockNameTextView, stockCodeTextView, colorTextView, totalAmountTextView, amountTextView;
-
+        TextView stockNameTextView, stockCodeTextView, colorTextView, totalAmountTextView, amountTextView, slashTextView;
         CardView cardView;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            cardView = (CardView) itemView.findViewById(R.id.cardView);
             stockNameTextView = (TextView) itemView.findViewById(R.id.txtStokAdi);
             stockCodeTextView = (TextView) itemView.findViewById(R.id.txtStokKodu);
             colorTextView = (TextView) itemView.findViewById(R.id.txtRenk);
             totalAmountTextView = (TextView) itemView.findViewById(R.id.txtToplamMiktar);
             amountTextView = (TextView) itemView.findViewById(R.id.txtMiktar);
-            cardView = (CardView) itemView.findViewById(R.id.cardView);
+            slashTextView = (TextView) itemView.findViewById(R.id.txtSlash);
         }
     }
 
@@ -57,6 +60,16 @@ public class ListAdapter_Customer_Order_Detail extends RecyclerView.Adapter<List
         holder.colorTextView.setText(customerOrderDetail.getColor());
         holder.totalAmountTextView.setText(String.valueOf(customerOrderDetail.getSevkMiktar()));
         holder.amountTextView.setText(String.valueOf(customerOrderDetail.getGonderilenMiktar()));
+
+        if (customerOrderDetail.getGonderilenMiktar() >= customerOrderDetail.getSevkMiktar()) {
+            holder.cardView.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(30, 120, 30)));
+            holder.stockNameTextView.setTextColor(Color.WHITE);
+            holder.stockCodeTextView.setTextColor(Color.WHITE);
+            holder.colorTextView.setTextColor(Color.WHITE);
+            holder.totalAmountTextView.setTextColor(Color.WHITE);
+            holder.amountTextView.setTextColor(Color.WHITE);
+            holder.slashTextView.setTextColor(Color.WHITE);
+        }
     }
 
     @Override
